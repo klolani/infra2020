@@ -1,15 +1,15 @@
 {
-  "Version": "2012-10-17",
-  "Statement": [
+  "Version"      : "2012-10-17",
+  "Statement"    : [
     {
-      "Effect": "Allow",
+      "Effect"   : "Allow",
       "Principal": {
-        "AWS": "${trusted_entity}"
+        "AWS"    : "${trusted_entity}"
       },
-      "Action": "sts:AssumeRole",
+      "Action"   : "sts:AssumeRole",
       "Condition": {
-        "Bool": {
-          "aws:MultiFactorAuthPresent": "true"
+        "Bool"   : {
+          "aws   :MultiFactorAuthPresent": "true"
         }
       }
     }

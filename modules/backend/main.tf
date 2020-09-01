@@ -1,12 +1,12 @@
 resource "aws_s3_bucket" "this" {
-bucket = var.bucket_name
-acl    = "private"
+  bucket            = var.bucket_name
+  acl               = "private"
 
-versioning {
-  enabled = true
-}
+  versioning {
+    enabled         = true
+  }
 
-lifecycle {
-  prevent_destroy = true
-}
+  lifecycle {
+    prevent_destroy = true
+  }
 }
