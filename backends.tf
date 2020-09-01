@@ -1,4 +1,13 @@
-module "backend_staging" {
+module "backend_dev" {
+  source      = "./modules/backend"
+  bucket_name = local.terraform_state_bucket_name.dev
+
+  providers = {
+    aws = aws.dev
+  }
+}
+
+odule "backend_staging" {
   source      = "./modules/backend"
   bucket_name = local.terraform_state_bucket_name.staging
 

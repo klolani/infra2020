@@ -13,6 +13,15 @@ provider "aws" {
 
 provider "aws" {
   assume_role {
+    role_arn = "arn:aws:iam::${aws_organizations_account.staging.id}:role/Dev"
+  }
+
+  alias  = "dev"
+  region = "us-west-2"
+}
+
+provider "aws" {
+  assume_role {
     role_arn = "arn:aws:iam::${aws_organizations_account.staging.id}:role/Staging"
   }
 
@@ -36,6 +45,12 @@ resource "aws_organizations_account" "users" {
   name      = local.account_name["users"]
   email     = local.account_owner_email["users"]
   role_name = "User"
+}
+
+resource "aws_organizations_account" "dev" {
+  name      = local.account_name["dev"]
+  email     = local.account_owner_email["dev"]
+  role_name = "Dev"
 }
 
 resource "aws_organizations_account" "staging" {
