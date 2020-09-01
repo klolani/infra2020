@@ -25,7 +25,7 @@ module "ops_role_production" {
   }
 }
 
-module "developer_group_dev" {
+module "ops_group_dev" {
   source     = "./modules/groups"
   group_name = "ops-dev"
 
@@ -38,7 +38,7 @@ module "developer_group_dev" {
   }
 }
 
-module "developer_group_staging" {
+module "ops_group_staging" {
   source     = "./modules/groups"
   group_name = "ops-staging"
 
@@ -51,7 +51,7 @@ module "developer_group_staging" {
   }
 }
 
-module "developer_group_production" {
+module "ops_group_production" {
   source     = "./modules/groups"
   group_name = "ops-production"
 
@@ -64,43 +64,43 @@ module "developer_group_production" {
   }
 }
 
-resource "aws_iam_group" "self_managing" {
-  name = "SelfManaging"
+resource "aws_iam_group" "ops_self_managing" {
+  name = "OpsSelfManaging"
 
   provider = aws.users
 }
 
-resource "aws_iam_group_policy_attachment" "iam_read_only_access" {
-  group      = aws_iam_group.self_managing.name
+resource "aws_iam_group_policy_attachment" "ops_iam_read_only_access" {
+  group      = aws_iam_group.ops_self_managing.name
   policy_arn = "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
 
   provider = aws.users
 }
 
-resource "aws_iam_group_policy_attachment" "iam_self_manage_service_specific_credentials" {
-  group      = aws_iam_group.self_managing.name
+resource "aws_iam_group_policy_attachment" "ops_iam_self_manage_service_specific_credentials" {
+  group      = aws_iam_group.ops_self_managing.name
   policy_arn = "arn:aws:iam::aws:policy/IAMSelfManageServiceSpecificCredentials"
 
   provider = aws.users
 }
 
-resource "aws_iam_group_policy_attachment" "iam_user_change_password" {
-  group      = aws_iam_group.self_managing.name
+resource "aws_iam_group_policy_attachment" "ops_iam_user_change_password" {
+  group      = aws_iam_group.ops_self_managing.name
   policy_arn = "arn:aws:iam::aws:policy/IAMUserChangePassword"
 
   provider = aws.users
 }
 
-resource "aws_iam_policy" "self_manage_vmfa" {
-  name   = "SelfManageVMFA"
+resource "aws_iam_policy" "ops_self_manage_vmfa" {
+  name   = "OpsSelfManageVMFA"
   policy = file("${path.module}/data/self_manage_vmfa.json")
 
   provider = aws.users
 }
 
-resource "aws_iam_group_policy_attachment" "self_manage_vmfa" {
-  group      = aws_iam_group.self_managing.name
-  policy_arn = aws_iam_policy.self_manage_vmfa.arn
+resource "aws_iam_group_policy_attachment" "ops_self_manage_vmfa" {
+  group      = aws_iam_group.ops_self_managing.name
+  policy_arn = aws_iam_policy.ops_self_manage_vmfa.arn
 
   provider = aws.users
 }

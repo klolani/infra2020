@@ -5,3 +5,7 @@ variable "name" {
 variable "groups" {
   type = list(string)
 }
+
+variable "pgp_key" {
+  type = string
+}

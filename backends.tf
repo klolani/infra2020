@@ -7,7 +7,7 @@ module "backend_dev" {
   }
 }
 
-odule "backend_staging" {
+module "backend_staging" {
   source      = "./modules/backend"
   bucket_name = local.terraform_state_bucket_name.staging
 
