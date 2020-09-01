@@ -3,7 +3,7 @@
 #   value       = aws_instance.server.private_ip
 #   description = "The private IP address of the main server instance."
 #   sensitive   = true
-# 
+#
 #   depends_on = [
 #     # Security group rule must be created before this IP address could
 #     # actually be used, otherwise the services will be unreachable.
