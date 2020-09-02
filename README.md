@@ -20,6 +20,13 @@ purpose of the task, it does not have to run against a real AWS environment.
   * S3 Bucket
     - Serve as a terraform backend to store our terraform state files
 
+**Write Terraform code which will:**
+    - Create users and groups
+    - Assign users to the groups
+    - Create roles for each group (users should be able to assume them); you do not have to
+    assign any policies to the roles.
+
+**Terraform code Layout**
     ├── Data
     │   └── self_manage_vmfa.json
     ├── Makefile
@@ -101,6 +108,7 @@ Notes:
 _Recommendations:_
 - Integrate Single Sign On and eliminate the need to create individual users
 - Enable AWS CLI integrations via SSO
+- Add Terraform tests via Terratest
 
 **The approach and reasons behind my choices**
 * AWS multi-account architecture in a highly automated and enables the infrastructure to operate at scale.
